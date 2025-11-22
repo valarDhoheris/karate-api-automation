@@ -49,16 +49,16 @@ pipeline {
             subject: "Karate Report: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: reportHtml,
             mimeType: 'text/html',
-            to: env.RECIPIENTS
+            to: env.RECIPIENTS,
+            attachPatterns: 'target/karate-reports/**'
           )
         } else {
           // fallback email when report is not found
-                to: env.RECIPIENTS
-                attachPatterns: 'target/karate-reports/**'
+          emailext(
             subject: "Karate Report Missing: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: "karate-summary.html not found at ${env.WORKSPACE}/${env.REPORT}. Check build logs for details.",
             to: env.RECIPIENTS
-            )
+          )
         }
       }
     }
