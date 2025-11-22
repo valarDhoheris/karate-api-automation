@@ -53,12 +53,12 @@ pipeline {
           )
         } else {
           // fallback email when report is not found
-                to: env.RECIPIENTS,
+                to: env.RECIPIENTS
                 attachPatterns: 'target/karate-reports/**'
             subject: "Karate Report Missing: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: "karate-summary.html not found at ${env.WORKSPACE}/${env.REPORT}. Check build logs for details.",
             to: env.RECIPIENTS
-          )
+            )
         }
       }
     }
